@@ -1,0 +1,23 @@
+{
+  "name": "easy-notes-app",
+  "version": "1.0.0",
+  "description": " \"Never miss a thing in life. Take notes quickly. Organize and keep track of all your notes\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "\"EasyNotesApp_Sanjana\"",
+  "license": "MIT",
+  "keywords": [
+    "[\"Express\"",
+    "\"RestAPI\"",
+    "\"MongoDB\"",
+    "\"Mongoose\"",
+    "\"Notes\"]"
+  ],
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.9"
+  }
+}
