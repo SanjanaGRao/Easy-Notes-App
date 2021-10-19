@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dbConfig = require('./database.config');
-const logger = require('../winston_logger');
+const logger = require('../config/winston_logger');
 
 const dbConnect = () => {
     mongoose.connect(dbConfig.url, {
