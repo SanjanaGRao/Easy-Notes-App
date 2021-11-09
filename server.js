@@ -6,8 +6,15 @@ const dbConnect = require('./config/note.dbConnect');
 const logger = require('./config/winston_logger');
 const swagger = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
-
+const cors = require('cors');
 const app = express();
+
+const corsOptions ={
+    origin:'http://localhost:3000',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 // parse requests of content-type
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,9 +31,9 @@ app.get('/', (req, res) => {
 });
 
 // listen for requests
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000.");
-    logger.info("Server is listening on port 3000.");
+app.listen(4000, () => {
+    console.log("Server is listening on port 4000.");
+    logger.info("Server is listening on port 4000.");
     dbConnect;
 });
 

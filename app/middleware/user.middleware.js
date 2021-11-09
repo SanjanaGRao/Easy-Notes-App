@@ -13,12 +13,6 @@ class userMiddleware {
                 message: "Please enter a valid email ID.",
             });
         }
-        var phNumberRegex = RegExp("^91 [1-9][0-9]{9}$");
-        if (!phNumberRegex.test(req.body.phNumber)) {
-            return res.status(400).send({
-                message: "Please enter a valid contact number.",
-            });
-        }
         next();
     }
 }

@@ -7,7 +7,6 @@ const UserSchema = mongoose.Schema({
     firstName: {type: String, required: true}, 
     lastName: {type: String},
     email: {type: String,  unique: true, required: true},
-    phNumber: {type: String, required: true},
     password: {type: String},
     resetPasswordToken: {type: String},
     resetPasswordExpires: Date,
@@ -34,7 +33,6 @@ class userModels {
             firstName: object.firstName,
             lastName: object.lastName,
             email: object.email,
-            phNumber: object.phNumber,
             password: encryptPassword,
         });
         // Save user in the database
@@ -59,7 +57,7 @@ class userModels {
 
     // Find user and update his/her details with the request body
     updateUser = (findId, object, callback) => {
-        User.findByIdAndUpdate(findId, { firstName: object.firstName, lastName: object.lastName, email: object.email, phNumber: object.phNumber }, { new: true },
+        User.findByIdAndUpdate(findId, { firstName: object.firstName, lastName: object.lastName, email: object.email, }, { new: true },
             (err, data) => {
                 return err ? callback(err, null) : callback(null, data);
             });

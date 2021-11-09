@@ -18,7 +18,7 @@ class userOperations {
             logger.info("Successfully logged in");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = data;
-            res.send(responseObject);
+            return res.send(responseObject);
         });
     };
 
@@ -28,7 +28,7 @@ class userOperations {
         if (!errors.isEmpty()) {
             responseObject = dtoObj.userApiFailure;
             responseObject.message = errors.array();
-            res.send(responseObject);
+            return res.send(responseObject);
         }
         let object = req.body;
         userService.createANewUser(object, (err, data) => {
@@ -36,12 +36,12 @@ class userOperations {
                 logger.error(err);
                 responseObject = dtoObj.userApiFailure;
                 responseObject.message = err.message;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             logger.info("Registeration Successful");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = data;
-            res.send(responseObject);
+            return res.send(responseObject);
         });
     };
 
@@ -52,12 +52,12 @@ class userOperations {
               logger.error(err);
               responseObject = dtoObj.userApiFailure;
               responseObject.message = err.message;
-              res.send(responseObject);
+              return res.send(responseObject);
             }
             logger.info("Successfully retrived all the users.");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = data;
-            res.send(responseObject);
+            return res.send(responseObject);
           });
     };
 
@@ -70,20 +70,20 @@ class userOperations {
                 if (err.kind === "ObjectId") {
                     responseObject = dtoObj.userApiFindFailure;
                     responseObject.message = err.message;
-                    res.send(responseObject);
+                    return res.send(responseObject);
                 }
                 responseObject = dtoObj.userApiFailure;
                 responseObject.message = err.message;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             if (!data) {
                 responseObject = dtoObj.userApiFindFailure;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             logger.info("Successfully retrieved");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = data;
-            res.send(responseObject);
+            return res.send(responseObject);
         });
     };
 
@@ -101,20 +101,20 @@ class userOperations {
                 if (err.kind === "ObjectId") {
                     responseObject = dtoObj.userApiFindFailure;
                     responseObject.message = err.message;
-                    res.send(responseObject);
+                    return res.send(responseObject);
                 }
                 responseObject = dtoObj.userApiFailure;
                 responseObject.message = err.message;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             if (!data) {
                 responseObject = dtoObj.userApiFindFailure;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             logger.info("Succesfully updated");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = "Succesfully updated";
-            res.send(responseObject);
+            return res.send(responseObject);
         });
     };
 
@@ -127,11 +127,11 @@ class userOperations {
                 if (err.kind === "ObjectId") {
                     responseObject = dtoObj.userApiFindFailure;
                     responseObject.message = err.message;
-                    res.send(responseObject);
+                    return res.send(responseObject);
                 }
                 responseObject = dtoObj.userApiFailure;
                 responseObject.message = err.message;
-                res.send(responseObject);
+                return res.send(responseObject);
             }
             if (!data) {
                 responseObject = dtoObj.userApiFindFailure;
@@ -140,7 +140,7 @@ class userOperations {
             logger.info("Deleted succesfully");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = "Deleted successfully";
-            res.send(responseObject);
+            return res.send(responseObject);
         });
     };
 
@@ -149,9 +149,9 @@ class userOperations {
         let email = req.body.email;
         userService
             .forgotPassword(email)
-            .then((data) => { res.send("Result:" + data); })
+            .then((data) => { return res.send("Result:" + data); })
             .catch((err) => {
-                res.send(err);
+                return res.send(err);
             });
     };
 
@@ -166,7 +166,7 @@ class userOperations {
             })
             .catch((err) => {
                 console.log("error:" + err);
-                res.send(err);
+                return res.send(err);
             });
     };
 }
