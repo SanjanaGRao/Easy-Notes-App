@@ -1,7 +1,7 @@
 {
     "User schema": {
       "userCreateAPI": {
-        "url": "/user",
+        "url": "/users",
         "method": "POST",
         "body": {
           "firstName":"String",
@@ -15,7 +15,7 @@
         }
       },
       "userFindAllAPI": {
-        "url": "/user",
+        "url": "/users",
         "method": "GET",
         "body": null,
         "headers": {
@@ -24,7 +24,7 @@
         }
       },
       "userFindOneAPI": {
-        "url": "/user/:userId",
+        "url": "/users/:userId",
         "method": "GET",
         "body": null,
         "headers": {
@@ -33,7 +33,7 @@
         }
       },
       "userUpdateAPI": {
-        "url": "/user/:userId",
+        "url": "/users/:userId",
         "method": "PUT",
         "body": {
           "firstName":"String",
@@ -47,7 +47,7 @@
         }
       },
       "userDeleteAPI": {
-        "url": "/user/:userId",
+        "url": "/users/:userId",
         "method":"DELETE",
         "body": null,
         "headers": {
@@ -56,7 +56,7 @@
         }
       },
       "userLoginAPI": {
-        "url": "/user/login",
+        "url": "/users/login",
         "method": "POST",
         "body": {
           "Email": "String",
@@ -68,7 +68,7 @@
         }
       },
       "userForgotPasswordAPI": {
-        "url": "/user/forgot",
+        "url": "/users/forgot",
         "method": "POST",
         "body": {
           "email": "String"
@@ -79,7 +79,7 @@
         }
       },
       "userResetPasswordAPI": {
-        "url": "/user/reset/:token",
+        "url": "/users/reset/:token",
         "method": "POST",
         "body": {
           "password": "String"

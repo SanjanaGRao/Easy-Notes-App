@@ -23,7 +23,7 @@ app.use('/notes', routeNotes);
 app.use('/users', routeUsers);
 
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
-
+app.use('/images', express.static('app/public'));
 // define a simple route
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to FundooNotes application. Take notes quickly. Organize and keep track of all your notes."});

@@ -1,15 +1,18 @@
 const noteService = require('../../service/note.service');
 const dtoObj = require("./note.responseSchema");
 let responseObject;
+const { application } = require('express');
 
 class noteOperations {
     // Create and Save a new Note
     create = (req, res) => {
         let body = req.body;
-        noteService.createANewNote(body, (err, data) => {
+        let color = req.body.color;
+        let filename= (req.file===undefined)?(undefined):(req.file.filename);
+        noteService.createANewNote(body, color, filename, (err, data) => {
             if (err) {
                 responseObject = dtoObj.noteApiFailure;
-                responseObject.message = err.message;
+                responseObject.message = err.message;s
                 res.send(responseObject);
             }
             responseObject = dtoObj.noteApiSuccess;
@@ -20,14 +23,12 @@ class noteOperations {
 
     // Retrieve and return all notes from the database.
     findNotes = (req, res) => {
-        noteService.findAllNotes((err, data) => {
-            if (err) {
-                responseObject = dtoObj.noteApiFailure;
-                responseObject.message = err.message;
-                res.send(responseObject);
-            }
-            responseObject = dtoObj.noteApiSuccess;
-            responseObject.message = data;
+        noteService.findAllNotes(req.body.userId).then(notes => {
+            res.send(notes);
+        }).catch(err => {
+            logger.error(err.message)
+            responseObject = dtoObj.noteApiFailure;
+            responseObject.message = err.message;
             res.send(responseObject);
         });
     };
@@ -60,23 +61,19 @@ class noteOperations {
     update = (req, res) => {
         let id = req.params.noteId;
         let body = req.body;
-        noteService.updateANote(id, body, (err, data) => {
-            if (err) {
-                if (err.kind === "ObjectId") {
-                    responseObject = dtoObj.noteApiFindFailure;
-                    responseObject.message = err.message;
-                    res.send(responseObject);
-                }
-                responseObject = dtoObj.noteApiFailure;
+        let trash = req.body.isTrash;
+        let color = req.body.color;
+        let filename= (req.file===undefined)?(undefined):(req.file.filename);
+        noteService.updateANote( req.params.userId, id, body, trash, color, filename).then(note => {
+            res.send(note);
+        }).catch(err => {
+            if (err.kind === 'ObjectId') {
+                responseObject = dtoObj.noteApiFindFailure;
                 responseObject.message = err.message;
                 res.send(responseObject);
-            }
-            if (!data) {
-                responseObject = dtoObj.noteApiFindFailure;
-                res.send(responseObject);
-            }
-            responseObject = dtoObj.noteApiSuccess;
-            responseObject.message = data;
+            } 
+            responseObject = dtoObj.noteApiFailure;
+            responseObject.message = err.message;
             res.send(responseObject);
         });
     };
@@ -84,23 +81,17 @@ class noteOperations {
     // Delete a note with the specified noteId in the request
     delete = (req, res) => {
         let id = req.params.noteId;
-        noteService.deleteANote(id, (err, data) => {
-            if (err) {
-                if (err.kind === "ObjectId") {
-                    responseObject = dtoObj.noteApiFindFailure;
-                    responseObject.message = err.message;
-                    res.send(responseObject);
-                }
+        let userId = req.params.userId;
+        noteService.deleteANote(userId, id).then(note => {
+            res.send({message: "Note deleted "});
+        }).catch(err => {
+            if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 responseObject = dtoObj.noteApiFailure;
                 responseObject.message = err.message;
                 res.send(responseObject);
             }
-            if (!data) {
-                responseObject = dtoObj.noteApiFindFailure;
-                res.send(responseObject);
-            }
-            responseObject = dtoObj.noteApiSuccess;
-            responseObject.message = " Note deleted.";
+            responseObject = dtoObj.noteApiFailure;
+            responseObject.message = err.message;
             res.send(responseObject);
         });
     };

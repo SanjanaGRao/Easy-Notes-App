@@ -8,6 +8,7 @@ class userOperations {
     //For user to login
     loginUser = (req, res) => {
         let object = req.body;
+        console.log(object);
         userService.loginUser(object, (err, data) => {
             if (err) {
                 logger.error(err);
@@ -18,6 +19,7 @@ class userOperations {
             logger.info("Successfully logged in");
             responseObject = dtoObj.userApiSuccess;
             responseObject.message = data;
+            console.log(responseObject);
             return res.send(responseObject);
         });
     };
