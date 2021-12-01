@@ -1,13 +1,20 @@
 var nodemailer = require("nodemailer");
 require('dotenv').config();
 
-class nodeMailer {
+class NodeMailer {
+  /**
+ * @description sends mail to the destined user
+ * @param {String} email 
+ * @param {String} token 
+ * @returns error or data
+ */
   mailer = (email, token) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
+      secure: false,
       auth: {
         user: "sanjanaaaaa310@gmail.com",
-        pass: "ItsmeSanjana",
+        pass: process.env.PASSWORD,
       },
     });
 
@@ -30,4 +37,4 @@ class nodeMailer {
   };
 }
 
-module.exports = new nodeMailer();
+module.exports = new NodeMailer();

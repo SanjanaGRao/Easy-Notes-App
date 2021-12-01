@@ -1,3 +1,14 @@
+/* ************************************************************************
+ * Execution        : 1. default node       cmd> nodemon server.js
+ * 
+ * Purpose          : get the values from the controller and process them for the notes in fundooNotes                
+ * 
+ * @file            : server.js
+ * @author          : Sanjana Rao
+ * @version         : 1.0
+ * @since           : 15-10-2021
+ * 
+ **************************************************************************/
 const express = require('express');
 const bodyParser = require('body-parser');
 const routeUsers = require('./app/routes/user.routes');
@@ -11,7 +22,7 @@ const app = express();
 
 const corsOptions ={
     origin:'http://localhost:3000',
-    credentials:true,            //access-control-allow-credentials:true
+    credentials:true,            
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
@@ -21,10 +32,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/notes', routeNotes);
 app.use('/users', routeUsers);
-
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
 app.use('/images', express.static('app/public'));
-// define a simple route
+
+// defining a simple route
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to FundooNotes application. Take notes quickly. Organize and keep track of all your notes."});
     logger.info("Welcome to FundooNotes application. Take notes quickly. Organize and keep track of all your notes.");

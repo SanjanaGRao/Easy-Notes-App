@@ -1,5 +1,17 @@
-class userMiddleware {
-    //Middleware to validate the name and email ID
+/**
+ * @file            : user.middleware.js
+ * @author          : Sanjana Rao
+ * @version         : 1.0
+ * @since           : 15-10-2021
+ */
+class UserMiddleware {
+    /**
+     * @description Middleware to validate the name and email ID
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Object} next 
+     * @returns status of the action.
+     */
     userValidation = (req, res, next) => {
         var regexPatternName = new RegExp("^[A-Z][a-zA-Z]{2,}");
         if ((!regexPatternName.test(req.body.firstName)) && (!regexPatternName.test(req.body.lastName))) {
@@ -16,4 +28,4 @@ class userMiddleware {
         next();
     }
 }
-module.exports = new userMiddleware();
+module.exports = new UserMiddleware();

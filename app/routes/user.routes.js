@@ -1,3 +1,9 @@
+/**
+ * @file            : user.routes.js
+ * @author          : Sanjana Rao
+ * @version         : 1.0
+ * @since           : 15-10-2021
+ */
 const express = require('express');
 const router = express.Router();
 const userOperations = require('../controllers/users/user.controller');
