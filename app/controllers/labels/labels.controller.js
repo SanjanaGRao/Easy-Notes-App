@@ -17,8 +17,9 @@ class LabelController {
    */
   create = async (req, res) => {
     let title = req.body.title;
+    let userId = req.body.userId;
     try {
-      const data = await labelService.createNewLabel(title);
+      const data = await labelService.createNewLabel(title, userId);
       return res.send(data);
     } catch (error) {
         logger.error(error);
@@ -32,8 +33,9 @@ class LabelController {
    * @param {Object} res
    */
   findAll = async (req, res) => {
+    let userId = req.body.userId;
     try {
-      const data = await labelService.findAllLabels();
+      const data = await labelService.findAllLabels(userId);
       logger.info("responded with all labels");
       return res.send(data);
     } catch (error) {
@@ -48,9 +50,10 @@ class LabelController {
    * @param {Object} res
    */
   findOne = async (req, res ) => {
-    let id = req.params.labelId; 
+    let id = req.params.labelId;
+    let userId = req.body.userId; 
     try {
-      const data = await labelService.findLabel( id);
+      const data = await labelService.findLabel(userId, id);
       return res.send(data);
       }
      catch(error) {
@@ -67,8 +70,9 @@ class LabelController {
   update = async (req, res) => {
     let id = req.params.labelId;
     let title = req.body.title; 
+    let userId = req.body.userId;
     try {
-      const data = await labelService.updateLabel(id, title);
+      const data = await labelService.updateLabel(userId, id, title);
       return res.send(data);
     } catch (error) {
         logger.error(error);
@@ -83,9 +87,10 @@ class LabelController {
    */
   deleteOne = async (req, res) => {
     let id = req.params.labelId;
+    let userId = req.body.userId;
     try {
-        const data = await labelService.deleteById(id)
-        return res.send("Note deleted successfully.");
+        const data = await labelService.deleteById(userId, id)
+        return res.send({message: "Label deleted successfully!"});
     } catch (error) {
         logger.error(error);
         return res.send(error);

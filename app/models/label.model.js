@@ -12,7 +12,8 @@ const mongoose = require("mongoose");
  */
 const LabelSchema = mongoose.Schema(
   {
-    title: {type: String, required: true}
+    title: {type: String, required: true},
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
@@ -27,9 +28,10 @@ class LabelModel {
    * @param {String} title
    * @returns
    */
-  createLabel = (title) => {
+  createLabel = (title,userId) => {
     const label = new Label({
       title: title,
+      userId: userId
     });
     return label.save();
   };
@@ -38,8 +40,11 @@ class LabelModel {
    * @description Query to find all labels
    * @returns data
    */
-  findLabels = () => {
-      return Label.find();
+  findLabels = (userId) => {
+      return Label.find({ userId: userId }).populate({
+        path: "userId",
+        select: ["email"],
+      });
   };
 
   /**
@@ -47,8 +52,8 @@ class LabelModel {
    * @param {String} id
    * @returns data
    */
-  findSingleLabel = (id) => {
-    return Label.findById(id);
+  findSingleLabel = (userId, id) => {
+    return Label.findById({ userId: userId, _id: id });
   };
 
   /**
@@ -57,10 +62,13 @@ class LabelModel {
    * @param {String} title
    * @returns data
    */
-  findSingleLabelAndUpdate = (id, title) => {
-    return Label.findByIdAndUpdate(id, {
+  findSingleLabelAndUpdate = (id, title, userId) => {
+    return Label.findByIdAndUpdate({ userId: userId, _id: id }, 
+    {
         title:title
-    })
+    },
+     {new: true}
+    )
   };
 
   /**
@@ -68,8 +76,8 @@ class LabelModel {
    * @param {String} id
    * @returns data
    */
-  findAndRemove = (id) => {
-    return Label.findByIdAndRemove(id);
+  findAndRemove = (id, userId) => {
+    return Label.findByIdAndRemove({userId: userId, _id: id});
   };
 }
 

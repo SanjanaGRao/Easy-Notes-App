@@ -13,24 +13,24 @@ class LabelService {
    * @param {String} title
    * @returns data
    */
-  createNewLabel = (title) => {
-     return labelModel.createLabel(title);
+  createNewLabel = (title, userId) => {
+     return labelModel.createLabel(title,userId);
   };
 
   /**
    * @description find all labels
    * @returns data
    */
-  findAllLabels = () => {
-      return labelModel.findLabels();
+  findAllLabels = (userId) => {
+      return labelModel.findLabels(userId);
   };
 
   /**
    * @description find a single label
    * @param {String} findId
    */
-  findLabel = (findId) => {
-      return labelModel.findSingleLabel(findId);
+  findLabel = (findId, userId) => {
+      return labelModel.findSingleLabel(findId, userId);
   };
 
   /**
@@ -38,10 +38,11 @@ class LabelService {
    * @param {String} findId
    * @param {String} title
    */
-  updateLabel = (findId, title) => {
+  updateLabel = (findId, title, userId) => {
       return labelModel.findSingleLabelAndUpdate(
         findId,
         title,
+        userId
       );
   };
 
@@ -49,8 +50,8 @@ class LabelService {
    * @description delete a label
    * @param {String} findId
    */
-  deleteById =(findId) => {
-      return labelModel.findAndRemove(findId);
+  deleteById =(findId, userId) => {
+      return labelModel.findAndRemove(findId, userId);
   };
 }
 
