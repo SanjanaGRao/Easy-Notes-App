@@ -13,6 +13,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const routeUsers = require('./app/routes/user.routes');
 const routeNotes = require('./app/routes/note.routes');
+const routeLabels = require('./app/routes/label.routes');
 const dbConnect = require('./config/note.dbConnect');
 const logger = require('./config/winston_logger');
 const swagger = require('swagger-ui-express');
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/notes', routeNotes);
 app.use('/users', routeUsers);
+app.use('/labels',routeLabels)
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
 app.use('/images', express.static('app/public'));
 
