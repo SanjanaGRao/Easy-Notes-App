@@ -89,7 +89,7 @@ class LabelController {
     let id = req.params.labelId;
     let userId = req.body.userId;
     try {
-        const data = await labelService.deleteById(userId, id)
+        const data = await labelService.deleteById(id, userId)
         return res.send({message: "Label deleted successfully!"});
     } catch (error) {
         logger.error(error);

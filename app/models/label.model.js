@@ -77,7 +77,7 @@ class LabelModel {
    * @returns data
    */
   findAndRemove = (id, userId) => {
-    return Label.findByIdAndRemove({userId: userId, _id: id});
+    return Label.findOneAndRemove({userId: userId, _id: id});
   };
 }
 

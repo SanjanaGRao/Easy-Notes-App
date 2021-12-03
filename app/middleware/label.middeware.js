@@ -38,7 +38,8 @@ const ensureTokenLabel = (req, res, next) => {
   if (!bearerHeader) {
     res.send("Empty Token.");
   }
-  const token = bearerHeader;
+  const bearer = bearerHeader.split(" ");
+  const token = bearer[1];
   jwtHelper.verifyToken(token, (err, data) => {
     if (err) {
       res.send(err);
