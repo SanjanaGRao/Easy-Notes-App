@@ -11,6 +11,7 @@ class LabelService {
   /**
    * @description extracting details to create a new label in the model
    * @param {String} title
+   * @param {String} userId
    * @returns data
    */
   createNewLabel = (title, userId) => {
@@ -19,6 +20,7 @@ class LabelService {
 
   /**
    * @description find all labels
+   * @param {String} userId
    * @returns data
    */
   findAllLabels = (userId) => {
@@ -27,6 +29,7 @@ class LabelService {
 
   /**
    * @description find a single label
+   * @param {String} userId
    * @param {String} findId
    */
   findLabel = (findId, userId) => {
@@ -36,6 +39,7 @@ class LabelService {
   /**
    * @description Find label and update it with the request body
    * @param {String} findId
+   * @param {String} userId
    * @param {String} title
    */
   updateLabel = (findId, title, userId) => {
@@ -49,6 +53,7 @@ class LabelService {
   /**
    * @description delete a label
    * @param {String} findId
+   * @param {String} userId
    */
   deleteById =(findId, userId) => {
       return labelModel.findAndRemove(findId, userId);

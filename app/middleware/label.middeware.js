@@ -7,15 +7,20 @@
 
 const jwtHelper = require("../../utils/jwt");
 
+/**
+ * @description To check if title is present and validate title name
+ * @param {Object} req 
+ * @param {Object} res 
+ * @param {Object} next 
+ * @returns validation status
+ */
 const labelValidate = (req, res, next) => {
-  //check if title is present
   if (!req.body.title) {
     return res.status(400).send({
       message: "Label content can not be empty",
     });
   }
 
-  //validate title name
   var pattern = new RegExp("(^[a-zA-z]+([\\s][a-zA-Z]+)*$)");
   if (!pattern.test(req.body.title)) {
     return res.status(400).send({
@@ -31,7 +36,6 @@ const labelValidate = (req, res, next) => {
  * @param {Object} req
  * @param {Object}  res
  * @param {Object} next
- * @returns
  */
 const ensureTokenLabel = (req, res, next) => {
   const bearerHeader = req.headers["authorization"] || req.headers.token;

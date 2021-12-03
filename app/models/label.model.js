@@ -26,6 +26,7 @@ class LabelModel {
   /**
    * @description Query to create a label
    * @param {String} title
+   * @param {String} userId
    * @returns
    */
   createLabel = (title,userId) => {
@@ -38,6 +39,7 @@ class LabelModel {
 
   /**
    * @description Query to find all labels
+   * @param {String} userId
    * @returns data
    */
   findLabels = (userId) => {
@@ -50,6 +52,7 @@ class LabelModel {
   /**
    * @description Query to find one specific note
    * @param {String} id
+   * @param {String} userId
    * @returns data
    */
   findSingleLabel = (userId, id) => {
@@ -60,6 +63,7 @@ class LabelModel {
    * @description Query to find and update note
    * @param {String} id
    * @param {String} title
+   * @param {String} userId
    * @returns data
    */
   findSingleLabelAndUpdate = (id, title, userId) => {
@@ -74,6 +78,7 @@ class LabelModel {
   /**
    * @description Query to find and remove a label
    * @param {String} id
+   * @param {String} userId
    * @returns data
    */
   findAndRemove = (id, userId) => {
