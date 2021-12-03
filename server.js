@@ -11,6 +11,7 @@
  **************************************************************************/
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const routeUsers = require('./app/routes/user.routes');
 const routeNotes = require('./app/routes/note.routes');
 const routeLabels = require('./app/routes/label.routes');
@@ -44,7 +45,7 @@ app.get('/', (req, res) => {
 });
 
 // listen for requests
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server is listening on port 4000.");
     logger.info("Server is listening on port 4000.");
     dbConnect;

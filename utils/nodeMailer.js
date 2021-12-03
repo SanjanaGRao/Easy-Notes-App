@@ -14,7 +14,7 @@ class NodeMailer {
       secure: false,
       auth: {
         user: "sanjanaaaaa310@gmail.com",
-        pass: "ItsmeSanjana"
+        pass: process.env.PASSWORD,
       },
     });
 

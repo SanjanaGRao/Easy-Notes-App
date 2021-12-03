@@ -4,6 +4,8 @@
  * @version         : 1.0
  * @since           : 15-10-2021
  */
+require('dotenv').config();
 module.exports = {
-    url: 'mongodb://localhost:27017/NewProjectFundooNotes'
+    url: process.env.URL
 }
+
