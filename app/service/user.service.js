@@ -61,10 +61,8 @@ class UserService {
    * @param {callback} callback
    * @returns error or data
    */
-  findOnlyOneUser = (email, callback) => {
-    userModels.findOneUser(email, (err, data) => {
-      return err ? callback(err, null) : callback(null, data);
-    });
+  findOnlyOneUser = (findId) => {
+    return userModels.findOneUser(findId);
   };
 
   /**

@@ -91,28 +91,24 @@ class UserOperations {
    * @param {Object} responseObject
    */
   findOneUser = (req, res) => {
-    let email = req.params.userId;
-    userService.findOnlyOneUser(email, (err, data) => {
-      if (err) {
-        logger.error(err);
+    let findId = req.params.userId;
+    userService
+      .findOnlyOneUser(findId)
+      .then((data) => {
+        responseObject = dtoObj.userApiSuccess;
+        responseObject.message = data;
+        res.send(responseObject);
+      })
+      .catch((err) => {
         if (err.kind === "ObjectId") {
+          logger.error("user not found with id");
           responseObject = dtoObj.userApiFindFailure;
-          responseObject.message = err.message;
-          return res.send(responseObject);
+          res.send(responseObject);
         }
         responseObject = dtoObj.userApiFailure;
         responseObject.message = err.message;
-        return res.send(responseObject);
-      }
-      if (!data) {
-        responseObject = dtoObj.userApiFindFailure;
-        return res.send(responseObject);
-      }
-      logger.info("Successfully retrieved");
-      responseObject = dtoObj.userApiSuccess;
-      responseObject.message = data;
-      return res.send(responseObject);
-    });
+        res.send(responseObject);
+      });
   };
 
   /**

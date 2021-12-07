@@ -11,7 +11,7 @@ class LabelService {
   /**
    * @description extracting details to create a new label in the model
    * @param {String} title
-   * @param {String} userId
+   * @param {String} userId 
    * @returns data
    */
   createNewLabel = (title, userId) => {

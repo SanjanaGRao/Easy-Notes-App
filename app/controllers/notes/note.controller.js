@@ -61,27 +61,23 @@ class NoteOperations {
    */
   findOne = (req, res) => {
     let id = req.params.noteId;
-    noteService.findOnlyOneNote(id, (err, data) => {
-      if (err) {
+    noteService
+      .findOnlyOneNote(id)
+      .then((note) => {
+        res.send(note);
+      })
+      .catch((err) => {
         if (err.kind === "ObjectId") {
-          logger.error(err.message);
+          logger.error("Note not found with id");
           responseObject = dtoObj.noteApiFindFailure;
           responseObject.message = err.message;
           res.send(responseObject);
         }
-        logger.error(err.message);
+        logger.error("Note not found with id");
         responseObject = dtoObj.noteApiFailure;
         responseObject.message = err.message;
         res.send(responseObject);
-      }
-      if (!data) {
-        responseObject = dtoObj.noteApiFindFailure;
-        res.send(responseObject);
-      }
-      responseObject = dtoObj.noteApiSuccess;
-      responseObject.message = data;
-      res.send(responseObject);
-    });
+      });
   };
 
   /**

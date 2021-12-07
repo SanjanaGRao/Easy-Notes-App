@@ -42,12 +42,9 @@ class NoteService {
    * @description find a single note
    * @param {String} userId
    * @param {String} findId
-   * @param {callback} callback
    */
-  findOnlyOneNote = (userId, findId, callback) => {
-    noteModels.findOneNote(userId, findId, (err, data) => {
-      return err ? callback(err, null) : callback(null, data);
-    });
+  findOnlyOneNote = (userId, findId) => {
+    return noteModels.findOneNote(userId, findId);
   };
 
   /**

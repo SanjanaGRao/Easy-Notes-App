@@ -83,10 +83,8 @@ class UserModels {
    * @param {callback} callback
    * @returns error or callback
    */
-  findOneUser = (email, callback) => {
-    User.findById({ email: email }, (err, data) => {
-      return err ? callback(err, null) : callback(null, data);
-    });
+  findOneUser = (findId) => {
+    return User.findById(findId)
   };
 
   /**

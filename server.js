@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 });
 
 // listen for requests
-app.listen(process.env.PORT, () => {
+module.exports = app.listen(process.env.PORT, () => {
     console.log("Server is listening on port 4000.");
     logger.info("Server is listening on port 4000.");
     dbConnect;

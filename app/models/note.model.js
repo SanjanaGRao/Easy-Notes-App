@@ -69,17 +69,8 @@ class NoteModels {
    * @param {String} findId
    * @returns error or promise
    */
-  findOneNote = (userId, findId, callback) => {
-    return Note.findOne({ userId: userId, _id: findId }, (error, data) => {
-      if (error) {
-        return callback(error, null);
-      }
-      if (!data) {
-        return callback("You can't access this note", null);
-      } else {
-        return callback(null, data);
-      }
-    });
+  findOneNote = (userId, findId) => {
+    return Note.findOne({ userId: userId, _id: findId });
   };
 
   /**
